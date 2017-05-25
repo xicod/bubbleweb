@@ -8,12 +8,10 @@ Currently it supports browsing the server, managing a playlist and playing.
 
 # Installation
 1. Clone the repository to somewhere accessible by your web server.
-2. Run:
-    cp config.inc.dist.php config.inc.php
-    cp config.inc.dist.js config.inc.js
-3. 
-  Edit config.inc.php with server details
-  Edit config.inc.js with UI preferences.
+2. cp config.inc.dist.php config.inc.php
+3. cp config.inc.dist.js config.inc.js
+4. Edit config.inc.php with server details
+5. Edit config.inc.js with UI preferences.
   
 
 # Screenshot
