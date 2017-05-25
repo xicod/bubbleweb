@@ -1,0 +1,141 @@
+
+html body {
+	background-color: #ffffff;
+}
+
+html, body {
+	height: 99%;
+}
+
+.link {
+	color: #0f79ab;
+}
+
+#topRow, #secondRow {
+	padding-left: 50px; 
+	padding-right: 50px;
+}
+
+#topRow {
+	height: 250px;
+	padding-top: 20px;
+}
+
+
+.v-align {
+	display: flex;
+	align-items: center;
+}
+
+.list-toolbar {
+	height: 50px;
+	padding-left: 5px;
+}
+
+#addAllButton {
+}
+
+#deviceList, #listItems, #playListItems {
+	overflow-y: auto; 
+}
+
+#deviceList {
+	max-height: 100px;
+}
+
+.mediaItemAddToPlaylist, .mediaItemDragger{
+	margin-right: 5px;
+}
+
+.mediaItemAddToPlaylist, .mediaItemRemoveFromPlaylist, .mediaItemDragger {
+	width: 50px;
+}
+
+.deviceListsEntry {
+	height: 65px;
+}
+
+#bitrateSelector, #songDetailsContainer {
+	margin-top: 20px;
+}
+
+#playerContainer, #coverImage {
+	width: 300px;
+}
+
+#browseFilter {
+	max-width: 150px;
+}
+
+#fullScreenOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.7);
+	z-index: 5;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+#overlayMedia {
+}
+
+#overlayMediaObject {
+	max-height: 90%;
+	max-width: 90%;
+	border: 5px solid rgba(0,0,0,0.4);
+	border-radius: 10px;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+
+}
+
+#overlayCloseButton, #overlayNextButton, #overlayPreviousButton {
+	display: block;
+	position: absolute;
+	background: rgba(0,0,0,0.8);
+	color: white;
+	height: 30px;
+	width: 35px;
+	font-size: 20px;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+}
+
+#overlayCloseButton {
+	top: 3px;
+	right: 2px;
+}
+
+#overlayNextButton, #overlayPreviousButton {
+	height: 200px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#overlayNextButton {
+	right: 4px;
+}
+
+#overlayPreviousButton {
+	left: 4px;
+}
+
+#songErrorLabel {
+	max-width: 100%; 
+	display: hidden;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+}
+
+#overlayHint {
+	float: left; 
+	color: white; 
+	padding: 10px 0px 0px 10px;
+}

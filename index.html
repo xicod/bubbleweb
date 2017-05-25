@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>BubbleWeb</title>
+
+		<meta name="description" content="A BubbleUPnP Server web client">
+		<meta name="author" content="Denis Tokarev (denistok || xicod.com)" >
+
+		<link href="lib/css/bootstrap.min.css" rel="stylesheet">
+		<link href="lib/css/jquery-ui.min.css">
+		<script src="lib/js/jquery-3.2.1.min.js"></script>
+		<script src="lib/js/bootstrap.min.js"></script>
+		<script src="lib/js/jquery-ui.min.js"></script>
+
+		<link href="css/style.css" rel="stylesheet">
+		<script src="js/bubbleweb.js"></script>
+		<script src="config.inc.dist.js"></script>
+		<script src="config.inc.js"></script>
+	</head>
+	<body onLoad="onLoadFunc()">
+
+		<div id="fullScreenOverlay">
+			<div id="overlayHint">*Left/Right keys to navigate, Esc to close</div>		
+	
+			<div id="overlayMedia">
+	
+			</div>
+			<span class="link" id="overlayCloseButton" role="button" onClick="closeOverlay()">x</span>
+			<span class="link" id="overlayNextButton" role="button" onClick="closeOverlay()">
+				<div style="height: 100%;" class="v-align">
+					<div style="text-align: center; width: 100%;">&gt;</div>
+				</div>
+			</span>
+			<span class="link" id="overlayPreviousButton" role="button" onClick="closeOverlay()">
+				<div style="height: 100%;" class="v-align">
+					<div style="text-align: center; width: 100%;">&lt;</div>
+				</div>
+			</span>
+
+		</div>
+		
+		
+
+		<div class="container-fluid">
+			<div class="row" id="topRow">
+				<div class="col-md-2">
+					<img style="float:left" src="images/bubble.jpeg"/>
+				</div>
+				<div class="col-md-1">
+					<div class="content-heading"><h3>BubbleWeb</h3></div>
+				</div>
+				<div class="col-md-6" style="padding-top: 50px;">
+					<div class="alert alert-dismissable alert-danger center-block" style="display:none; max-width: 300px;" id="errorBox">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4>Error:</h4> 
+						<span id="errorMsg">The error</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<br>
+					<label>Devices: (<span class="link" role="button" onClick="getDevices()">Refresh</span>)</label>
+					<br>
+					<div class="list-group" id="deviceList" style="max-width: 300px;">
+					</div>
+				</div>
+			</div>
+			<div class="row" id="secondRow">
+				<div class="col-md-4">
+					<div class="list-group">
+						<a class="list-group-item active">Browser <span id="serverNameInBrowserTab"></span></a>
+						<div class="list-toolbar v-align">
+							<span class="link" role="button" id="browseBackLink">Back</span>
+							&nbsp;|&nbsp;
+							Filter:&nbsp;<input type="url" id="browseFilter" oninput="browseFilterChanged()">
+							&nbsp;&nbsp;
+							<span class="link" id="addAllButton" role="button" onClick="addAllSongsToPlaylist()">Add All</span>
+							&nbsp;|&nbsp;
+							<span class="link" id="refreshPageButton" role="button" onClick="refreshPage()">Refresh</span>
+						</div>
+						<div id="listItems">
+							<span class="list-group-item">Please select a device from list</span>
+						</div>
+						<a class="list-group-item active"></a>
+					</div>
+
+				</div>
+				<div class="col-md-5">
+					<div class="list-group">
+						<a class="list-group-item active">Playlist</a>
+						<div class="list-toolbar v-align">
+							<span class="link" role="button" onClick="clearPlaylist()">Clear</span>
+							&nbsp;|&nbsp;
+							<span class="link" role="button" onClick="shufflePlaylist()">Shuffle</span>
+							&nbsp;|&nbsp;
+							<span class="link" role="button" onClick="goToCurrentTrack()">Go to current</span>
+						</div>
+						<div id="playListItems">
+						</div>
+						<a class="list-group-item active"></a>
+					</div>
+
+				</div>
+				<div class="col-md-3">
+					<div id="playerContainer">
+						<img src="images/nocover.jpg" id="coverImage">
+						<br>	
+						<select id="bitrateSelector" onChange="bitrateSelectorChanged()">
+							<optgroup label="Lossless">
+								<option value="0">No compression</option>
+							</optgroup>
+							<optgroup label="Lossy">
+								<option value="128">Bitrate: 128kbps</option>
+								<option value="192" selected="selected">Bitrate: 192kbps</option>
+								<option value="256">Bitrate: 256kbps</option>
+								<option value="320">Bitrate: 320kbps</option>
+							</optgroup>
+						</select>
+						&nbsp;
+						<label>
+							<input type="checkbox" value="" id="seekableTracksCheckbox" onChange="bitrateSelectorChanged()">
+							<h5 style="display: inline;">Seekable Tracks</h5>
+						</label>
+						<div id="songDetailsContainer">
+							<h5>Artist: <span id="songDetailsArtist"></span></h5>
+							<h5>Title: <span id="songDetailsTitle"></span> <span id="songDetailsDuration"></span></h5>
+							<h5>Album: <span id="songDetailsAlbum"></span></h5>
+							<h5>Bitrate: <span id="songDetailsBitrate"></span></h5>
+						</div>
+						<div class="label label-success" id="songLoadingLabel" style="display: none;">Loading track..</div>
+						<div class="label label-danger" id="songErrorLabel" style="display: none;">ERROR</div>
+
+						<br><br>
+						<div id="audioPlayerWrapper">
+							<audio id="songStream" controls preload="auto" onCanPlay="onPlayerCanPlay()" onEnded="playerEndedPlayback()" onPlay="playerPlaying()" onPause="playerPaused()">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	  </body>
+</html>
