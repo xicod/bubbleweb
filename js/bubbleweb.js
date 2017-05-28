@@ -384,6 +384,7 @@ function browseQuery (udn, objectId){
 
 		pageCache.set(udn+objectId, entries);
 		displayBrowseEntries(udn+objectId);
+		setStatusOnActiveSong();
 	},
 	function(){
 	});
@@ -486,9 +487,8 @@ function browseDevice(udn, objectId, doPreviousScrollOffsetUpdate){
 	}else{
 		if (config.debugMsgs) console.info("loading page from cache");
 		displayBrowseEntries(udn+objectId);
+		setStatusOnActiveSong();
 	}
-
-	setStatusOnActiveSong();
 
 	$('#listItems').scrollTop(0);
 
