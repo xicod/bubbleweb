@@ -19,6 +19,7 @@ var audioPlayerInitialElem = undefined;
 
 var currentPageDetails = undefined;
 
+
 function onLoadFunc(){
 
 	$(window).resize(setListsSizes);
@@ -467,7 +468,7 @@ function browseDevice(udn, objectId, doPreviousScrollOffsetUpdate){
 	if (config.debugMsgs) console.info("Browsing device with udn = " + udn + " and objectId=" + objectId);
 
 	if (doPreviousScrollOffsetUpdate && browseHistoryIdx > 0){
-		browseTopOffsets[browseHistoryIdx-1] = $('#listItems').scrollTop();
+		browseTopOffsets[browseHistoryIdx-1] = ($('#browseFilter').val() == "") ? $('#listItems').scrollTop() : 0;
 	}
 
 	if (currentPageDetails == undefined || currentPageDetails.udn != udn || currentPageDetails.objectId != objectId){
