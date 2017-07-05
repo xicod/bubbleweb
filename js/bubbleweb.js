@@ -169,10 +169,13 @@ function getBrowserEntry(title, udn, objectId, coverLink){
 		// have to use onClick html property, because "click" event 
 		// is being cleared when removing from page
 		"onClick": "browseDevice('" + udn + "', '" + objectId + "', true)"
-	}).append($('<img>', {
-		"width": 48,
-		"src": getCompleteCoverLink(coverLink, 48)
-	})).append("&nbsp;&nbsp;" + title);
+	}).append($('<span>', {"style": 'width: 48px; text-align: center;'})
+		.append($('<img>', {
+			"width": 48,
+			"style": 'max-height: 48px;',
+			"src": getCompleteCoverLink(coverLink, 48)
+		}))
+	).append("&nbsp;&nbsp;" + title);
 }
 
 function makeQuery (queryData, handleFunction, failFunction){
@@ -317,10 +320,13 @@ function getMediaEntry(media, mode){
 		"class": 'list-group-item deviceListsEntry v-align col-xs-' + (mode == "playlist" ? '10' : '11') + ' mediaItemClickable',
 		"role": 'button',
 		"onClick": "playMedia(" + JSON.stringify(media) + ")"
-	}).append($('<img>', {
-                "width": 48,
-                "src": getCompleteCoverLink(media.coverLink, 48)
-        })).append("<span style='margin-left: 10px'>" 
+	}).append($('<span>', {"style": 'width: 48px; text-align: center;'})
+		.append($('<img>', {
+			"width": 48,
+			"style": 'max-height: 48px;',
+	                "src": getCompleteCoverLink(media.coverLink, 48)
+		}))
+	).append("<span style='margin-left: 10px'>"
 			+ ((media.type == "audio" && media.audio.trackNumber != undefined ? media.audio.trackNumber + ". " : "") + media.title)
 			+ "&nbsp;&nbsp;<img class='playStatus' width='16'></span>");
 
